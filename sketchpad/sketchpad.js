@@ -51,6 +51,7 @@ function multicolor() {
 function hiddenpic() {
   var newGrid = prompt("How many squares per side would you like the new grid?");
   $("h1").remove();
+  $("#redblock").hide();
   $("img").show();
   $("#container").empty();
   generateGrid(newGrid);
@@ -88,5 +89,21 @@ function fadeToBlack() {
   function() {
     $(this).css("background-color", "rgb("+ Math.floor(rgbArray[0]) + "," + Math.floor(rgbArray[1]) + "," +
     Math.floor(rgbArray[2]) + ")");
+  });
+}
+
+function trail() {
+  var newGrid = prompt("How many squares per side would you like the new grid?");
+  $("h1").remove();
+  $("img").hide();
+  $("#redblock").show();
+
+  $("#container").empty();
+  generateGrid(newGrid);
+  $("#container> div").hover(function() {
+    $(this).fadeTo("fast", 0);
+  },
+  function() {
+    $(this).fadeTo(2000, 1);
   });
 }
