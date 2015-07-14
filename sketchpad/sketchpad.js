@@ -1,4 +1,7 @@
-var area = 960
+var area = 960;
+var r_sub = 5.3;
+var g_sub = 7.5;
+var b_sub = 9.4;
 
 $(document).ready(function() {
     generateGrid(16);
@@ -45,26 +48,45 @@ function multicolor() {
   });
 }
 
-function fadeToBlack() {
-  $("#container").empty();
-  var grid = prompt("How many squares per side would you like the new grid?");
+function hiddenpic() {
+  var newGrid = prompt("How many squares per side would you like the new grid?");
   $("h1").remove();
-  var num = 0;
-  var size = area/grid;
-  while(num < grid * grid) {
-    $("#container").append('<div style=" opacity: 0; height: ' + size + 'px; width: '
-     + size + 'px;"></div>');
-     num += 1;
-  };
-  add_ons();
+  $("img").show();
+  $("#container").empty();
+  generateGrid(newGrid);
   $("#container> div").mouseenter(function() {
     var trans = $(this).css('opacity') * 10;
     var inc = 1;
-    var together = (trans + inc)/10
+    var together = (trans - inc)/10
     $(this).css('opacity', together);
   });
 
   $("#container> div").mouseleave(function() {
     $(this).css('opacity', together);
+  });
+}
+
+
+function strip(rgb) {
+  //returns an array with each rgb value
+  var strArray = rgb.substring(4, rgb.length-1).split(",");
+  return [Number(strArray[0]) - r_sub, Number(strArray[1]) - g_sub, Number(strArray[2]) - b_sub]
+}
+
+function fadeToBlack() {
+  var newGrid = prompt("How many squares per side would you like the new grid?");
+  $("#container").empty();
+  generateGrid(newGrid);
+  $("#container> div").hover(
+    function() {
+    $this = $(this).css('background-color');
+    if ($this !== 'rgb(0,0,0)') {
+    rgbArray = strip($this);
+    $(this).css("background-color", "rgb("+ Math.floor(rgbArray[0]) + "," + Math.floor(rgbArray[1]) + "," +
+    Math.floor(rgbArray[2]) + ")");
+  };},
+  function() {
+    $(this).css("background-color", "rgb("+ Math.floor(rgbArray[0]) + "," + Math.floor(rgbArray[1]) + "," +
+    Math.floor(rgbArray[2]) + ")");
   });
 }

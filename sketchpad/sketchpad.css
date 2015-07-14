@@ -4,7 +4,7 @@ body {
 }
 
 h1 {
-  font-family: courier; 
+  font-family: courier;
 }
 
 #header {
@@ -26,7 +26,7 @@ button {
   width: 960px;
   margin: 30px auto;
   height: 960px;
-  background-color: #E8E8E8;
+  box-sizing: border-box;
 }
 
 #container>div {
@@ -35,6 +35,12 @@ button {
   box-sizing: border-box;
 }
 
-.border {
-  border: 1px solid black;
+img {
+  position: absolute;
+  z-index: -1;
+  left: 195px;
+  top: 75px;
+  height: 950px;
+  width: 958px;
+  display: none;
 }
