@@ -1,4 +1,10 @@
-<%= @article.title %><br>
+<p><%= @article.title %><p>
+<p>
+  Tags:
+  <% @article.tags.each do |tag| %>
+    <%= link_to tag.name, tag_path(tag) %>
+  <% end %>
+</p>
 <%= @article.body%><br>
 <p>Posted <%= distance_of_time_in_words(@article.created_at, Time.now) %> ago</p>
 
